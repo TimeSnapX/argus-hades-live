@@ -24,3 +24,6 @@ form#wform{display:flex;gap:6px;margin-bottom:8px}input,textarea,select{flex:1;b
 textarea{width:100%;font-family:monospace;font-size:11px}dialog{background:var(--card);color:var(--tx);border:1px solid var(--ln);border-radius:12px;width:min(560px,94vw)}.row{display:flex;gap:6px}
 footer{text-align:center;color:var(--mu);font-size:11px;padding:16px}#toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#22304a;padding:8px 14px;border-radius:8px}
 .err{color:#ffb3bd;font-size:12px}
+
+.install-btn.hidden,#install-hint.hidden{display:none!important}.install-btn{color:var(--ac);border-color:#7c5cff88}
+#install-hint{position:fixed;left:10px;right:10px;bottom:calc(46px + env(safe-area-inset-bottom));z-index:20;display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--ac);border-radius:10px;padding:10px 12px;font-size:13px;box-shadow:0 6px 24px #0008}#install-hint .ih-text{flex:1}#install-hint .ih-close{background:none;border:0;color:var(--mu);font-size:16px;cursor:pointer}
