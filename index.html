@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Argus × Hades Live</title>
+<meta name="theme-color" content="#0b0f17"><meta name="description" content="Live dashboard for Argus scouting and Hades trades. Research only.">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/icon-192.png"><link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="app.css">
+</head><body>
+<header id="hdr">
+ <div class="brand"><b>Argus × Hades</b> <span class="tag">LIVE · research only</span></div>
+ <div class="hstats"><span id="sol">SOL —</span><span id="upd">—</span><button id="live" class="btn on">● Live</button></div>
+ <div id="net" class="banner" hidden></div>
+</header>
+<nav id="tabs"><button data-t="scout" class="act">Scout</button><button data-t="argus">Argus</button><button data-t="hades">Hades</button><button data-t="watch">Watch</button></nav>
+<main>
+ <section id="scout" class="panel act"><div class="ph"><h2>Live scout feed</h2><select id="sfilter"><option value="all">All new</option><option value="grad">pump.fun graduated</option><option value="safe">RugCheck OK</option></select></div><div id="scoutMeta" class="meta"></div><div id="scoutList" class="list"></div></section>
+ <section id="argus" class="panel"><div class="ph"><h2>Argus picks</h2><button id="impBtn" class="btn sm">Paste / import</button></div><div id="argusMeta" class="meta"></div><div id="argusList" class="list"></div></section>
+ <section id="hades" class="panel"><div class="ph"><h2>Hades trades</h2><div class="seg"><button data-w="all" class="act">All</button><button data-w="human">Me</button><button data-w="agent">Agent</button></div></div><div id="hadesMeta" class="meta"></div><div id="hadesSum" class="sum"></div><canvas id="eq" height="120"></canvas><div id="posList" class="list"></div></section>
+ <section id="watch" class="panel"><div class="ph"><h2>Watchlist</h2></div><form id="wform"><input id="wca" placeholder="Paste Solana CA" autocomplete="off"><button class="btn">Add</button></form><div id="watchMeta" class="meta"></div><div id="watchList" class="list"></div></section>
+</main>
+<dialog id="imp"><form method="dialog"><h3>Import feed / trades JSON</h3><p class="meta">Paste a feed.json (argus-hades-feed/1), a Hades trades.json, or an array of picks/trades. Stored on this device only.</p><textarea id="impTxt" rows="10"></textarea><div class="row"><button value="ok" id="impOk" class="btn">Import</button><button value="clear" id="impClr" class="btn sm">Clear local import</button><button value="cancel" class="btn sm">Cancel</button></div><p id="impMsg" class="meta"></p></form></dialog>
+<footer>Research only. No bot here places trades. Data: DexScreener, RugCheck, Jupiter (keyless). Not financial advice.</footer>
+<div id="toast" hidden></div>
+<script type="module" src="app.js"></script>
+</body></html>
