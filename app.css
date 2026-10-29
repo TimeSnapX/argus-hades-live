@@ -27,3 +27,6 @@ footer{text-align:center;color:var(--mu);font-size:11px;padding:16px}#toast{posi
 
 .install-btn.hidden,#install-hint.hidden{display:none!important}.install-btn{color:var(--ac);border-color:#7c5cff88}
 #install-hint{position:fixed;left:10px;right:10px;bottom:calc(46px + env(safe-area-inset-bottom));z-index:20;display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--ac);border-radius:10px;padding:10px 12px;font-size:13px;box-shadow:0 6px 24px #0008}#install-hint .ih-text{flex:1}#install-hint .ih-close{background:none;border:0;color:var(--mu);font-size:16px;cursor:pointer}
+
+.btn.pump{background:#53d769;color:#06140a;font-weight:700}
+.btn.ghost{opacity:.8;font-size:.85em}

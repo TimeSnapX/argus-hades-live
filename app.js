@@ -1,6 +1,9 @@
 // Argus × Hades Live — research-only dashboard. No API keys; every figure shows its source and age.
 const DS = "https://api.dexscreener.com";
 const WSOL = "So11111111111111111111111111111111111111112";
+const PUMP = (ca) => `https://pump.fun/coin/${encodeURIComponent(ca)}`;
+const PHANTOM = (ca) => `https://phantom.app/ul/browse/${encodeURIComponent(PUMP(ca))}?ref=${encodeURIComponent(location.origin)}`;
+const TRADE = (ca) => `<a class="btn sm pump" href="${PUMP(ca)}" target="_blank" rel="noopener">Trade on pump.fun ↗</a><a class="btn sm ghost" href="${PHANTOM(ca)}" target="_blank" rel="noopener">Open in Phantom</a>`;
 const CRR = (ca) => `https://timesnapx.github.io/coin-risk-reward/#/coin/${ca}`;
 const POLL_SCOUT = 20000, POLL_PRICE = 15000, POLL_FEED = 60000;
 const $ = (s) => document.querySelector(s);
@@ -97,7 +100,7 @@ function coinCard(ca, p, extra = "", opts = {}) {
     : `<div class="sub">Market data unavailable from DexScreener${S.src["DexScreener pairs"]?.ok === false ? " (source error)" : " (no Solana pair found yet)"}.</div>`;
   return `<div class="card" data-ca="${esc(ca)}"><div class="top"><div>${p?.info?.imageUrl ? `<img src="${esc(p.info.imageUrl)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ""}<span class="nm">${esc(sym)}</span> <span class="sub">${esc(name)}</span></div>${opts.noRc ? "" : rcPill(ca)}</div>
   <div class="ca">${esc(ca)}</div>${extra}${pd}
-  <div class="acts"><button class="btn sm" data-copy="${esc(ca)}">Copy CA</button><a class="btn sm" href="${CRR(ca)}" target="_blank" rel="noopener">Risk vs Reward ↗</a>${p?.url ? `<a class="btn sm" href="${esc(p.url)}" target="_blank" rel="noopener">Chart ↗</a>` : ""}<button class="btn sm" data-watch="${esc(ca)}" data-sym="${esc(sym)}">${watched ? "★ Watching" : "☆ Watch"}</button></div></div>`;
+  <div class="acts">${TRADE(ca)}<button class="btn sm" data-copy="${esc(ca)}">Copy CA</button><a class="btn sm" href="${CRR(ca)}" target="_blank" rel="noopener">Risk vs Reward ↗</a>${p?.url ? `<a class="btn sm" href="${esc(p.url)}" target="_blank" rel="noopener">Chart ↗</a>` : ""}<button class="btn sm" data-watch="${esc(ca)}" data-sym="${esc(sym)}">${watched ? "★ Watching" : "☆ Watch"}</button></div></div>`;
 }
 
 // ---------- Scout
@@ -191,7 +194,7 @@ function renderHades() {
     return `<div class="card"><div class="top"><div><span class="nm">${esc(p.token || p.mint.slice(0, 6))}</span> <span class="pill ${p.trader === "agent" ? "mid" : ""}">${p.trader === "agent" ? "Agent" : "Me"}</span> <span class="pill ${o ? "ok" : ""}">${o ? "OPEN" : "closed"}</span></div><div>${o ? (p.unreal !== undefined ? `<b class="${p.unreal >= 0 ? "pos" : "neg"}">${sol(p.unreal, 1)}</b>` : '<span class="warn">price unavailable</span>') : `<b class="${p.realized >= 0 ? "pos" : "neg"}">${sol(p.realized, 1)}</b>`}</div></div>
     <div class="ca">${esc(p.mint)}</div><div class="grid"><div><span>Cost in</span>${p.spent.toFixed(4)}</div><div><span>Back</span>${p.got.toFixed(4)}</div><div><span>${o ? "Value now" : "Trades"}</span>${o ? (p.value !== undefined ? p.value.toFixed(4) : "—") : `${p.buys}B/${p.sells}S`}</div>
     ${o ? `<div><span>Price</span>${px(num(pr?.priceUsd))}</div><div><span>Δ 1h</span>${pct(num(pr?.priceChange?.h1))}</div><div><span>Last</span>${bneD.format(new Date(p.last))}</div>` : `<div><span>Last</span>${bneD.format(new Date(p.last))}</div>`}</div>
-    <div class="acts"><button class="btn sm" data-copy="${esc(p.mint)}">Copy CA</button><a class="btn sm" href="${CRR(p.mint)}" target="_blank" rel="noopener">Risk vs Reward ↗</a></div></div>`;
+    <div class="acts">${TRADE(p.mint)}<button class="btn sm" data-copy="${esc(p.mint)}">Copy CA</button><a class="btn sm" href="${CRR(p.mint)}" target="_blank" rel="noopener">Risk vs Reward ↗</a></div></div>`;
   }).join("") : `<div class="card sub">No trades for this view.</div>`;
 }
 function drawEq(curve, unreal, hasOpen) {
